@@ -1,0 +1,27 @@
+{
+    "version":2,
+    "build":[
+        {
+            "src":"resumeApp/wsgipy",
+            "use":"@vercel/python",
+            "coding":{"mxlambdSize":"15mb","runtime":"python3.11.4"}
+        },
+        {
+            "src":"build_files.sh",
+            "use":"@vercel/static-build",
+            "config":{
+                "distDir":"staticfiles_build"
+            }
+        }
+    ],
+    "routers":[
+        {
+            "src":"/static/(.*)",
+            "dest":"/static/$1"
+        },
+        {
+            "src":"/(.*)",
+            "dest":"resumeApp/wsgi.py"
+        },
+    ]
+}
