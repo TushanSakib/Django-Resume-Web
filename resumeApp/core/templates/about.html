@@ -1,0 +1,77 @@
+{% extends 'base.html'%} 
+
+{% block content %}
+{% for a in about %}
+<div class="card mb-3" style="max-width: 540px;">
+    <div class="row g-0" style="box-shadow:10px 10px lightblue;">
+      <div class="col-md-4">
+        <img src="{{a.profile_img.url}}" class="img-fluid rounded-circle" alt="...">
+      </div>
+
+      <div class="col-md-8">
+        <div class="container" style="margin-left:320px;width:50px;height:50px">
+        <a href="{% url 'update_about' a.pk %}" class="btn btn-outline-success"><i class="fa-regular fa-pen-to-square"></i></a>
+        &nbsp;&nbsp;
+            <a href="" class="btn btn-outline-danger"><i class="fa-solid fa-trash-can"></i></a></td>
+        </div>
+
+        <div class="card-body">
+          <h5 class="card-title">{{a.first_name}} {{a.last_name}}</h5>
+          <p class="card-text"><small class="text-muted">{{a.address}}</small></p>
+          <p class="card-text"><small class="text-muted">{{a.phone}}</small></p>
+          <p class="card-text"><small class="text-muted">{{a.email}}</small></p>
+          <p class="card-text"><small class="text-muted">{{a.facebook_link}}</small></p>
+          <p class="card-text"><small class="text-muted">{{a.git_link}}</small></p>
+          <p class="card-text"><small class="text-muted">{{a.linkedin_link}}</small></p>
+          <p class="card-text"><small class="text-muted">{{a.twitter_link}}</small></p>
+          <p class="card-text">{{a.career_obj}}</p>
+
+        </div>
+      </div>
+
+      </div>
+    </div>
+    {% endfor %}
+    <div class="card-body">
+    <h2 class="text-center"><i>Interests</i></h2>
+    </div>
+
+    <div class="card mb-3" style="max-width: 1500px;">
+      <div class="row g-0">
+  
+        <div class="col-md-8">
+          <br/>
+          <form method="POST">
+            {% csrf_token%}
+            {{form.as_p}}
+            <button type="submit" class="btn btn-secondary">Add</button>
+          </form>
+          <br/>
+          {% for i in interest %}
+          <div class="card" style="box-shadow:10px 10px lightblue;">
+            <div class="container" style="margin-left:830px;">
+              <a href="{% url 'update_interest' i.pk %}" class="btn btn-outline-success"><i class="fa-regular fa-pen-to-square"></i></a>
+              &nbsp;
+               <a href="{% url 'delete_interest' i.pk %}" class="btn btn-outline-danger"><i class="fa-solid fa-trash-can"></i></a>
+
+                  
+              </div>
+            <div class="card-body">
+              <ul>
+             <li><p class="card-text">{{i.description}}</p></li>
+              </ul>
+            </div>
+          </div>
+          <br/><br/>
+          {% endfor %}
+
+        </div>
+  
+        </div>
+      </div>
+  <br/>
+  <br/>
+  <br/>
+
+
+{% endblock %}

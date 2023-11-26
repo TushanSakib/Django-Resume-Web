@@ -1,0 +1,32 @@
+{% extends 'base.html' %}  
+{% block content %}
+<a href="{% url 'add_project' %}" class="btn btn-outline-success" style="margin-left:1200px;"><i class="fa-solid fa-plus" style="color: #0c1c36;"></i>Add New</a>
+
+<h3 class="text-center">List Of Projects</h3>
+<br/><br/>
+<table class="table">
+    <tbody>
+        <thead>
+            <tr>
+                <th>Title</th>
+                <th>Link</th>
+
+                </tr>
+        </thead>
+        
+{% for p in project%}
+      <tr>
+        <th scope="row">{{p.title}}</th>
+        <td>{{p.github_link}}<td>
+          &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;
+          <td>
+          <a href="{% url 'update_project' p.pk%}" class="btn btn-outline-success"><i class="fa-regular fa-pen-to-square"></i></a>
+            &nbsp;
+            <a href="{% url 'delete_project' p.pk%}" class="btn btn-outline-danger"><i class="fa-solid fa-trash-can"></i></a></td>
+        </td>
+      </tr>
+      {% endfor%}
+    </tbody>
+  </table>
+
+{% endblock %}
